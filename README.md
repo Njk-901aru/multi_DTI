@@ -89,5 +89,5 @@ python omics_protein.py
 
 
 ## Reference
-* Watanabe, N., Sakakibara, Y. 
-  * Deep learning-based integration of multi-interactome data for protein-compound interaction prediction
+* Watanabe, N., Ohnuki, Y., Sakakibara, Y. 
+  * Deep learning integration of molecular and interactome data for protein-compound interaction prediction

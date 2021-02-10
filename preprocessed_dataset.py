@@ -55,7 +55,7 @@ for i in range(5):
     #get amino acid seq from Ensembl protein ID (ENSP) and convert them to onehot vectors
     with open(args.input+'/cv_'+str(i)+args.data+'_proIDs.txt') as f:
         pID = [s.strip() for s in f.readlines()]
-
+    plen = len(pID)
     ens = EnsemblRelease(93) #release 93 uses human reference genome GRCh38
     toseq = []
     for j in pID:
@@ -71,9 +71,9 @@ for i in range(5):
 
     Max = 5762
     onehot_tr = np.empty((plen, Max, 20), dtype='float32')
-    for j in range(len(integer_encoded_tr)):
-        b_onehot = np.identity(20, dtype='float32')[integer_encoded_tr[j]]
-        differ_tr = Max - len(integer_encoded_tr[j])
+    for j in range(len(integer_encoded)):
+        b_onehot = np.identity(20, dtype='float32')[integer_encoded[j]]
+        differ_tr = Max - len(integer_encoded[j])
         b_zeros = np.zeros((differ_tr, 20), dtype='float32')
         onehot_tr[j] = np.vstack((b_onehot, b_zeros))
     np.save(args.input+'/cv_'+str(i)+args.data+'_reprotein.npy', ontr)

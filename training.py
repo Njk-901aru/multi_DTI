@@ -8,11 +8,9 @@ import pickle
 import time, argparse, gc, os
 
 import numpy as np
-import cupy as cp
 
 from rdkit import Chem
 
-#from feature import *
 import integrateMV as MV
 
 import chainer
@@ -73,12 +71,10 @@ def main():
     xp = np
     if args.gpu >= 0:
         print('GPU mode')
-        #xp = cp
 
     #-------------------------------
-    # Loading SMILEs
+    # Loading datasets
     for i in range(5):
-        #i = i+4
         print('Making Training dataset...')
         ecfp = xp.load(args.input+'/cv_'+str(i)+'/train_fingerprint.npy')
         ecfp = xp.asarray(ecfp, dtype='float32').reshape(-1,1024)
@@ -147,8 +143,8 @@ def main():
         #-------------------------------
         # L2 regularization(weight decay)
         for param in model.params():
-            if param.name != 'b':  # バイアス以外だったら
-                param.update_rule.add_hook(WeightDecay(0.00001))  # 重み減衰を適用
+            if param.name != 'b':
+                param.update_rule.add_hook(WeightDecay(0.00001))
         #-------------------------------
         # Set up a trainer
         print('Trainer is setting up...', flush=True)

@@ -11,7 +11,6 @@ import cupy as cp
 
 from rdkit import Chem
 
-#from feature import *
 import integrateMV as MV
 
 import chainer

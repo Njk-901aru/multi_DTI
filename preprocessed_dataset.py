@@ -8,6 +8,7 @@ import pandas as pd
 import pubchempy as pcp
 import numpy as np
 from rdkit import Chem
+from rdkit.Chem import AllChem
 from pyensembl import EnsemblRelease
 
 parser = arg.ArgumentParser(description='ecfpWD_n2v')
@@ -76,7 +77,7 @@ for i in range(5):
         differ_tr = Max - len(integer_encoded[j])
         b_zeros = np.zeros((differ_tr, 20), dtype='float32')
         onehot_tr[j] = np.vstack((b_onehot, b_zeros))
-    np.save(args.input+'/cv_'+str(i)+args.data+'_reprotein.npy', ontr)
+    np.save(args.input+'/cv_'+str(i)+args.data+'_reprotein.npy', onehot_tr)
 
 
 # In[ ]:
